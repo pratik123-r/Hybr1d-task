@@ -9,5 +9,9 @@ module.exports = {
     },
     server: {
         port: process.env.PORT || 3000,
+    },
+    redis: {
+        port: process.env.REDIS_PORT || 6379,
+        host: process.env.REDIS_HOST || 'localhost'
     }
 };

@@ -15,7 +15,7 @@ const getAllSeller = async (req, res) => {
     const { query: { page = 1, limit = 20 } } = req;
     const users = await User.find({ userType: 'SELLER' }).select('-password').limit(limit * 1)
         .skip((page - 1) * limit)
-    const docCount = await User.find({ userType: 'SELLER' }).count();
+    const docCount = await User.find({ userType: 'SELLER' }).count().cache({ time: 5000 });
     res.send({
         data: {
             users: users,

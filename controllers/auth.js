@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const { Joi } = require('express-validation');
 const { generateHashPassword, findByCredentials } = require('../services/auth');
+const { clearKey } = require('../services/cache');
 
 const signUpValidation = {
     body: Joi.object({
@@ -19,6 +20,7 @@ const signUp = async (req, res) => {
         body: { password },
     } = req;
     const user = new User({ ...req.body, password: await generateHashPassword(password) })
+    clearKey(User.collection.collectionName);
     await user.save()
     res.send({
         message: "user created,",

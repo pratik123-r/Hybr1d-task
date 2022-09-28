@@ -6,6 +6,7 @@ const fs = require("fs");
 const { connectDb } = require('./services/mongodb-connection');
 const config = require('./config');
 const app = express();
+require('./services/cache')
 
 /**
  * Global declarations
