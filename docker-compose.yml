@@ -1,0 +1,19 @@
+version: "3"
+services:
+  web:
+    container_name: web-container
+    restart: always
+    build: .
+    links:
+      - redis
+    environment:
+      REDIS_HOST: redis
+    ports: 
+      - 1234:3200
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - 6379:6379
+
+ 
